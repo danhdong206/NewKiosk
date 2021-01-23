@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">NewKiosk</string>
+    <string name="allow_permission_name">Allow Permission</string>
+    <string name="set_default_launcher_name">Set default Launcher</string>
+    <string name="allow_usage_access_permission_name">Allow usage access permission</string>
+</resources>

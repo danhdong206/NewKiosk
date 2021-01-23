@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/linear_radio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/radio_allow_permission"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:checked="true"
+            android:theme="@style/MyRadioButton" />
+
+        <View
+            android:layout_width="168dp"
+            android:layout_height="2dp"
+            android:layout_gravity="center"
+            android:background="@color/radio_color" />
+
+        <RadioButton
+            android:id="@+id/radio_set_default_launcher"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:theme="@style/MyRadioButton" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linear_text_radio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/linear_radio"
+        android:layout_centerInParent="true"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/allow_permission_name"
+            android:textColor="@color/color_grey"
+            android:textSize="12sp" />
+
+        <View
+            android:layout_width="96dp"
+            android:layout_height="2dp"
+            android:layout_gravity="center"
+            android:background="@color/radio_color"
+            android:visibility="invisible" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:text="@string/set_default_launcher_name"
+            android:textColor="@color/color_grey"
+            android:textSize="12sp" />
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/linear_text_radio"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="20dp"
+        android:text="@string/allow_usage_access_permission_name"
+        android:textColor="@color/color_grey"
+        android:textSize="22sp"
+        android:textStyle="bold" />
+
+
+</RelativeLayout>
