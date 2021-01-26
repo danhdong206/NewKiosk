@@ -1,25 +1,26 @@
-package com.project.android.newkiosk.ui
+package com.project.android.newkiosk.ui.login
 
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.project.android.newkiosk.R
-import com.project.android.newkiosk.ui.allowpermission.view.AllowPermissionFragment
+import com.project.android.newkiosk.ui.login.view.LoginFragment
 
-class AllowPermissionActivity : AppCompatActivity(),
-    AllowPermissionFragment.OnFragmentInteractionListener {
+class LoginActivity : AppCompatActivity(), LoginFragment.OnFragmentInteractionListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_allow_permission)
+        setContentView(R.layout.activity_login)
 
-        val allowPermissionFragment = AllowPermissionFragment()
+        val loginFragment = LoginFragment()
         val fragmentManager = supportFragmentManager
         val fragmentTransaction = fragmentManager.beginTransaction()
-        fragmentTransaction.add(R.id.allow_permission_fragment, allowPermissionFragment)
+        fragmentTransaction.add(R.id.login_screen_fragment, loginFragment)
         fragmentTransaction.commit()
     }
 
     override fun onFragmentInteraction(uri: Uri?) {
 
     }
+
+
 }

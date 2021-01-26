@@ -1,18 +1,26 @@
 package com.project.android.newkiosk.ui.allowpermission.view
 
+import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
+import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.provider.Settings
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import com.project.android.newkiosk.R
+import com.project.android.newkiosk.utils.AppUtils.hasPermisson
+import com.project.android.newkiosk.utils.AppUtils.setLauncherDefault
+import kotlinx.android.synthetic.main.fragment_allow_permission.*
 
 
 class AllowPermissionFragment : Fragment() {
     private var mListener: OnFragmentInteractionListener? = null
+
 
     companion object {
         fun newInstance(someInt: Int, someTitle: String?): AllowPermissionFragment? {
@@ -30,9 +38,9 @@ class AllowPermissionFragment : Fragment() {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.fragment_allow_permission, container, false)
     }
@@ -47,8 +55,8 @@ class AllowPermissionFragment : Fragment() {
             context
         } else {
             throw RuntimeException(
-                context.toString()
-                        + " must implement OnFragmentInteractionListener"
+                    context.toString()
+                            + " must implement OnFragmentInteractionListener"
             )
         }
     }
@@ -61,6 +69,30 @@ class AllowPermissionFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
+        (activity as AppCompatActivity?)?.supportActionBar?.hide()
+
+        btn_got_it.setOnClickListener {
+            if (!hasPermisson(context!!)) {
+                val intent = Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS)
+                startActivity(intent)
+            } else {
+                setLauncherDefault(context!!)
+            }
+        }
 
     }
+
+    @SuppressLint("SetTextI18n")
+    override fun onStart() {
+        super.onStart()
+
+        if (hasPermisson(context!!)) {
+            radio_allow_permission.isChecked = true
+            view_line.setBackgroundColor(Color.parseColor("#E24F5A"))
+            txt_allow_permission.text = "Set this app as default launcher"
+            img_view.setImageResource(R.drawable.default_launcher)
+        }
+    }
+
+
 }
