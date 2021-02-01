@@ -4,4 +4,17 @@
     <string name="set_default_launcher_name">Set default Launcher</string>
     <string name="allow_usage_access_permission_name">Allow usage access permission</string>
     <string name="ok_got_it">OK,GOT IT!</string>
+
+    <string name="go">Go</string>
+    <string name="password">Password</string>
+    <string name="user_id">UserID</string>
+    <string name="gearlock_nightly">GEARLock Nighly</string>
+    <string name="version_0_3_0_b1_nightly_dev">version: 0.3.0.b1-nightly-dev</string>
+
+    <string name="user_id_can_not_empty">User ID can not empty</string>
+    <string name="password_can_not_empty">Password can not empty</string>
+    <string name="invalid_password">Password can not lower than 6 characters</string>
+    <string name="invalid_user_id">Invalid User ID</string>
+
+
 </resources>
