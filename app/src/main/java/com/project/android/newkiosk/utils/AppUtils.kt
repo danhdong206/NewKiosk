@@ -12,6 +12,7 @@ import android.provider.Settings
 import com.project.android.newkiosk.utils.Constants.LAUNCHER_CLASS
 import com.project.android.newkiosk.utils.Constants.LAUNCHER_PACKAGE
 
+
 object AppUtils {
 
     internal enum class HomeState {
