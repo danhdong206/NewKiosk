@@ -3,6 +3,7 @@ package com.project.android.newkiosk.ui.selectapp.view
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Context.MODE_PRIVATE
+import android.content.Intent
 import android.content.SharedPreferences
 import android.graphics.PorterDuff
 import android.net.Uri
@@ -15,7 +16,8 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.project.android.newkiosk.R
-import com.project.android.newkiosk.data.model.SelectApp
+import com.project.android.newkiosk.data.model.App
+import com.project.android.newkiosk.ui.main.MainActivity
 import com.project.android.newkiosk.utils.AppManagerHelper
 import com.project.android.newkiosk.utils.Constants
 import kotlinx.android.synthetic.main.fragment_selection_apps.*
@@ -27,7 +29,7 @@ class SelectAppFragment : Fragment() {
 
     private var mRecyclerView: RecyclerView? = null
     private var mAdapter: RecyclerView.Adapter<*>? = null
-    private var mInstalledSelectApps: ArrayList<SelectApp> = ArrayList()
+    private var mInstalledApps: ArrayList<App> = ArrayList()
     private var mAppManager: AppManagerHelper? = null
 
     private var mSelectAppAdapter: SelectAppAdapter? = null
@@ -100,12 +102,12 @@ class SelectAppFragment : Fragment() {
     }
 
     private fun checkApps() {
-        mSelectAppAdapter = SelectAppAdapter(context!!, mInstalledSelectApps)
+        mSelectAppAdapter = SelectAppAdapter(context!!, mInstalledApps)
 
         btn_lock.setOnClickListener {
             val stringBuilder: StringBuilder = StringBuilder()
 
-            for(appInfo in mInstalledSelectApps) {
+            for(appInfo in mInstalledApps) {
                 if (appInfo.isSelected()) {
                     stringBuilder.append(appInfo.getAppPackageName(), ",")
                 }
@@ -113,8 +115,11 @@ class SelectAppFragment : Fragment() {
 
             stringBuilder.deleteCharAt(stringBuilder.length - 1)
 
-            if (mInstalledSelectApps.size > 0) {
-                storeAppInfo(stringBuilder.toString())
+            if (mInstalledApps.size > 0) {
+                storeApp(stringBuilder.toString())
+                val intent = Intent(context, MainActivity::class.java)
+                startActivity(intent)
+                activity?.finish()
             }
         }
     }
@@ -124,17 +129,17 @@ class SelectAppFragment : Fragment() {
         val layoutManager = LinearLayoutManager(context)
         mRecyclerView?.layoutManager = layoutManager
         mAppManager = AppManagerHelper(context!!)
-        mInstalledSelectApps = mAppManager!!.getApps()!!
+        mInstalledApps = mAppManager!!.getApps()!!
 
         mAdapter = SelectAppAdapter(
             context!!,
-            mInstalledSelectApps
+            mInstalledApps
         )
 
         mRecyclerView!!.adapter = mAdapter
     }
 
-    private fun storeAppInfo(string: String) {
+    private fun storeApp(string: String) {
         val sharedPreferences: SharedPreferences =
             context!!.getSharedPreferences(Constants.PREFERENCES, MODE_PRIVATE)
 
@@ -142,19 +147,6 @@ class SelectAppFragment : Fragment() {
         editor.putString(Constants.APP_CHECKED, string)
         editor.apply()
     }
-
-//    private fun loadAppInfo() {
-//        val sharedPreferences: SharedPreferences =
-//            context!!.getSharedPreferences(Constants.PREFERENCES, MODE_PRIVATE)
-//        val gson = Gson()
-//        val json = sharedPreferences.getString(Constants.APP_CHECKED, null)
-//        val type: Type = object : TypeToken<ArrayList<AppInfo>>() {}.type
-//        mInstalledApps = gson.fromJson(json, type)
-//
-//        if(mInstalledApps == null) {
-//            mInstalledApps = ArrayList()
-//        }
-//    }
 
 
 }

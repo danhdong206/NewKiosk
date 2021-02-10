@@ -3,7 +3,7 @@ package com.project.android.newkiosk.data.model
 import android.graphics.drawable.Drawable
 
 
-class SelectApp {
+class App {
     private var appName: String? = null
     private var appIcon: Drawable? = null
     private var appPackageName: String? = null

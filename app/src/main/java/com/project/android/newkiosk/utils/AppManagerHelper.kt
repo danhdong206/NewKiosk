@@ -7,34 +7,34 @@ import android.content.pm.PackageManager
 import android.graphics.drawable.Drawable
 import androidx.core.content.ContextCompat
 import com.project.android.newkiosk.R
-import com.project.android.newkiosk.data.model.SelectApp
+import com.project.android.newkiosk.data.model.App
 import java.util.*
 import kotlin.collections.ArrayList
 
 
 class AppManagerHelper(context: Context) {
     private var mContext: Context? = context
-    private val mySelectApps: ArrayList<SelectApp>? = ArrayList()
+    private val myApps: ArrayList<App>? = ArrayList()
 
-    fun getApps(): ArrayList<SelectApp>? {
+    fun getApps(): ArrayList<App>? {
         loadApps()
-        return mySelectApps
+        return myApps
     }
 
     private fun loadApps() {
         val packages = mContext!!.packageManager.getInstalledApplications(0)
         for (packageInfo in packages) {
             if (mContext!!.packageManager.getLaunchIntentForPackage(packageInfo.packageName) != null) {
-                val newApp = SelectApp()
+                val newApp = App()
                 newApp.setAppName(getApplicationLabelByPackageName(packageInfo.packageName))
                 newApp.setAppIcon(getAppIconByPackageName(packageInfo.packageName))
                 newApp.setAppPackageName(packageInfo.packageName)
-                mySelectApps?.add(newApp)
+                myApps?.add(newApp)
             }
 
         }
 
-        mySelectApps?.sortWith(Comparator { s1, s2 -> s1.getAppName()!!.compareTo(s2.getAppName()!!, ignoreCase = true) })
+        myApps?.sortWith(Comparator { s1, s2 -> s1.getAppName()!!.compareTo(s2.getAppName()!!, ignoreCase = true) })
     }
 
     private fun getAppIconByPackageName(packageName: String): Drawable? {
