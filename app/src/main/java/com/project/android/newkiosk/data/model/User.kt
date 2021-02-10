@@ -11,7 +11,7 @@ data class User(private var userID: String?, private var password: String?) {
     }
 
     fun isPasswordGreaterThan6(): Boolean {
-        return password!!.length > 6
+        return password!!.length >= 6
     }
 
     fun getUserID(): String? {

@@ -16,5 +16,10 @@
     <string name="invalid_password">Password can not lower than 6 characters</string>
     <string name="invalid_user_id">Invalid User ID</string>
 
+    <string name="example">example</string>
+    <string name="lock">Lock</string>
+    <string name="unlock">UNLOCK</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
 
 </resources>

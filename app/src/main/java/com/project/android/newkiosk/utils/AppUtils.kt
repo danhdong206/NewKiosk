@@ -2,6 +2,7 @@ package com.project.android.newkiosk.utils
 
 import android.annotation.SuppressLint
 import android.app.AppOpsManager
+import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -9,6 +10,7 @@ import android.content.pm.ResolveInfo
 import android.net.Uri
 import android.os.Build
 import android.provider.Settings
+import com.project.android.newkiosk.ui.main.FakeLauncherActivity
 import com.project.android.newkiosk.utils.Constants.LAUNCHER_CLASS
 import com.project.android.newkiosk.utils.Constants.LAUNCHER_PACKAGE
 
@@ -88,14 +90,33 @@ object AppUtils {
         return false
     }
 
-    @SuppressLint("WrongConstant")
     fun isMyLauncherDefault(context: Context): Boolean {
         val localPackageManager = context.packageManager
         val intent = Intent("android.intent.action.MAIN")
         intent.addCategory("android.intent.category.HOME")
         return localPackageManager.resolveActivity(
             intent,
-            65536
+            PackageManager.MATCH_DEFAULT_ONLY
         ).activityInfo.packageName == context.packageName
+    }
+
+    fun resetPreferredLauncherAndOpenChooser(context: Context) {
+        val packageManager = context.packageManager
+        val componentName =
+            ComponentName(context, FakeLauncherActivity::class.java)
+        packageManager.setComponentEnabledSetting(
+            componentName,
+            PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
+            PackageManager.DONT_KILL_APP
+        )
+        val selector = Intent(Intent.ACTION_MAIN)
+        selector.addCategory(Intent.CATEGORY_HOME)
+        selector.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+        context.startActivity(selector)
+        packageManager.setComponentEnabledSetting(
+            componentName,
+            PackageManager.COMPONENT_ENABLED_STATE_DEFAULT,
+            PackageManager.DONT_KILL_APP
+        )
     }
 }
