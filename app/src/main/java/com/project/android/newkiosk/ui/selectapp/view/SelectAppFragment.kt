@@ -17,7 +17,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.project.android.newkiosk.R
 import com.project.android.newkiosk.data.model.App
-import com.project.android.newkiosk.ui.main.MainActivity
 import com.project.android.newkiosk.utils.AppManagerHelper
 import com.project.android.newkiosk.utils.Constants
 import kotlinx.android.synthetic.main.fragment_selection_apps.*
@@ -117,9 +116,6 @@ class SelectAppFragment : Fragment() {
 
             if (mInstalledApps.size > 0) {
                 storeApp(stringBuilder.toString())
-                val intent = Intent(context, MainActivity::class.java)
-                startActivity(intent)
-                activity?.finish()
             }
         }
     }
