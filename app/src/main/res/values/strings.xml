@@ -15,6 +15,10 @@
     <string name="password_can_not_empty">Password can not empty</string>
     <string name="invalid_password">Password can not lower than 6 characters</string>
     <string name="invalid_user_id">Invalid User ID</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="example">example</string>
+    <string name="lock">Lock</string>
 
 
 </resources>
